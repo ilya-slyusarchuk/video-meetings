@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 import MobileNav from './MobileNav'
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 
 const Navbar = () => {
 	return (
@@ -14,12 +15,18 @@ const Navbar = () => {
 					height={32}
 					className="max-sm:size-10"
 				/>
-				<p className='text-[26px] font-extrabold text-white max-sm:hidden'>Meetings</p>
+				<p className="text-[26px] font-extrabold text-white max-sm:hidden">Meetings</p>
 			</Link>
 
-      <div className='flex justify-between gap-5'>
-        <MobileNav />
-      </div>
+			<div className="flex justify-between gap-5">
+				<SignedIn>
+					<UserButton />
+				</SignedIn>
+				<SignedOut>
+					<SignInButton />
+				</SignedOut>
+				<MobileNav />
+			</div>
 		</nav>
 	)
 }
