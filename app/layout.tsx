@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import '@stream-io/video-react-sdk/dist/css/styles.css'
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+	variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -42,7 +39,7 @@ export default function RootLayout({
 				}}
 			>
 				<body
-					className={`${geistSans.variable} ${geistMono.variable} antialiased bg-dark-2`}
+					className={`${inter.variable} antialiased bg-dark-2`}
 				>
 					{children}
 					<div id="clerk-captcha" />
