@@ -43,7 +43,7 @@ export default function RootLayout({
 				>
 					{children}
 					<div id="clerk-captcha" />
-					<Toaster theme="dark" dir="rtl" position="top-right" />
+					<Toaster theme="dark" />
 				</body>
 			</ClerkProvider>
 		</html>
