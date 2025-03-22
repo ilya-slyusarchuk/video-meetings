@@ -38,7 +38,7 @@ const MeetingTypeList = () => {
 
 			if (!call) throw new Error('Failed to create meeting')
 
-			const startsAt = values.dateTime.toISOString() || new Date(Date.now()).toISOString()
+			const startsAt = values.dateTime.toISOString()
 			const description = values.description || 'Instant Meeting'
 
 			await call.getOrCreate({
@@ -52,7 +52,7 @@ const MeetingTypeList = () => {
 
 			setCallDetails(call)
 
-			if (!values.description) {
+			if (values.dateTime <= new Date(Date.now())) {
 				router.push(`/meeting/${call.id}`)
 			}
 
@@ -143,7 +143,9 @@ const MeetingTypeList = () => {
 					title="Meeting Created!"
 					className="text-center"
 					action={() => {
-						// navigator.clipboard.writeText(meetingLink)
+						navigator.clipboard.writeText(
+							`${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails.id}`
+						)
 						toast.success('Meeting link copied to clipboard')
 					}}
 					image="/icons/checked.svg"
