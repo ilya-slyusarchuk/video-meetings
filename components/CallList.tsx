@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import MeetingCard from './MeetingCard'
 import Loader from './Loader'
+import { toast } from 'sonner'
 
 interface CallListProps {
 	type: 'upcoming' | 'recording' | 'past'
@@ -44,15 +45,20 @@ const CallList = ({ type }: CallListProps) => {
 
 	useEffect(() => {
 		const fetchRecordings = async () => {
-			const callData = await Promise.all(
-				callRecordings?.map(meeting => meeting.queryRecordings()) ?? []
-			)
+			try {
+				const callData = await Promise.all(
+					callRecordings?.map(meeting => meeting.queryRecordings()) ?? []
+				)
 
-			const recordings = callData
-				.filter(call => call.recordings.length > 0)
-				.flatMap(call => call.recordings)
+				const recordings = callData
+					.filter(call => call.recordings.length > 0)
+					.flatMap(call => call.recordings)
 
-			setRecordings(recordings)
+				setRecordings(recordings)
+			} catch (error) {
+				console.error(error)
+				toast.error('Error fetching recordings')
+			}
 		}
 
 		if (type === 'recording') {
