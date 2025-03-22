@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-	Dialog,
-	DialogContent,
-	DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
@@ -25,6 +21,7 @@ const MeetingModal = ({
 	onClose,
 	title,
 	image,
+	children,
 	buttonIcon,
 	buttonText,
 	className,
@@ -42,6 +39,9 @@ const MeetingModal = ({
 					)}
 
 					<h1 className={cn('text-3xl font-bold leading-[42px]', className)}>{title}</h1>
+
+					{children}
+
 					<Button
 						onClick={action}
 						className="bg-blue-1 cursor-pointer focus-visible:ring-0 focus-visible:ring-offset-0"
